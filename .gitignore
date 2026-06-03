@@ -1,0 +1,41 @@
+
+### .NET Core Backend Tools & Security ###
+# User-Secret info
+*.user
+**/Properties/launchSettings.json
+
+# Appsettings secrets management (Always keep a template public, but hide production configs)
+**/appsettings.Production.json
+**/appsettings.Development.json
+# **/appsettings.json
+
+# Auth and key storage
+*.pem
+*.key
+*.pfx
+
+### .NET Core Build and Deployment Outputs ###
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleasePublic/
+x64/
+x86/
+[Bb]in/
+[Oo]bj/
+
+### Visual Studio & VS Code Artifacts ###
+.vs/
+.vscode/
+*.suo
+*.user
+*.sln.docstates
+*.loupe
+*.log
+
+### Rider & JetBrains IDEs ###
+.idea/
+*.sln.iml
+
+### Entity Framework Tools ###
+*.dh.json
