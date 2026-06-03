@@ -3,6 +3,7 @@ using App.Application.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace App.Api.Controllers
 {
@@ -18,8 +19,7 @@ namespace App.Api.Controllers
             _workspaceService = workspaceService;
         }
 
-        private int GetUserId() => int.Parse(User.Claims.First(c => c.Type == "id").Value);
-
+        private int GetUserId() => int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
 
         [HttpGet()]
         public async Task<IActionResult> MyWorkspaces()

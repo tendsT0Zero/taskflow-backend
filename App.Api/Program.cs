@@ -14,6 +14,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 builder.Services.AddScoped<IAuthService,AuthService>();
 builder.Services.AddScoped<IWorkspaceService, WorkspaceService>();
+builder.Services.AddScoped<IProjectService, ProjectService>();
 
 // Identity Congfiguration
 builder.Services.AddIdentity<AppUser, IdentityRole<int>>(options =>
