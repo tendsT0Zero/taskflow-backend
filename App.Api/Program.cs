@@ -1,5 +1,7 @@
+using App.Application.Interfaces;
 using App.Domain.Entities;
 using App.Infrastructure.Data;
+using App.Infrastructure.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -10,7 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-
+builder.Services.AddScoped<IAuthService,AuthService>();
 
 // Identity Congfiguration
 builder.Services.AddIdentity<AppUser, IdentityRole<int>>(options =>
@@ -28,7 +30,7 @@ builder.Services.AddIdentity<AppUser, IdentityRole<int>>(options =>
 
 // jwt configuration
 var jwtSettings = builder.Configuration.GetSection("JwtSettings");
-var secretKey = jwtSettings["SecretKey"];
+var secretKey = jwtSettings["Secret"];
 
 builder.Services.AddAuthentication(
         options =>
@@ -49,7 +51,7 @@ builder.Services.AddAuthentication(
                 ValidateIssuerSigningKey = true,
                 ValidIssuer = jwtSettings["Issuer"],
                 ValidAudience = jwtSettings["Audience"],
-                IssuerSigningKey = new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(secretKey)),
+                IssuerSigningKey = new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(secretKey!)),
 
             };
         }
