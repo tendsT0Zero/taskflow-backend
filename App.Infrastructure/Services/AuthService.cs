@@ -105,7 +105,7 @@ namespace App.Infrastructure.Services
         private AuthResponseDto GenerateJwtToken(AppUser user)
         {
             var jwtSettings = _configuration.GetSection("JwtSettings");
-            var key = Encoding.UTF8.GetBytes(jwtSettings["Secret"]);
+            var key = Encoding.UTF8.GetBytes(jwtSettings["Secret"]!);
 
             var claims = new List<Claim>
             {
